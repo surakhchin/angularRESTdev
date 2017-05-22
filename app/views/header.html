@@ -17,6 +17,9 @@
                 <p>Search Query: {{ searchBudgets }}</p>
 
             </div>
+            <div class="col-xs-12" ng-if="!showMenu">
+                <h3>{{message}}</h3>
+            </div>
             <form>
                 <div class="form-group">
                     <div class="input-group">
@@ -58,10 +61,10 @@
           </a>
         </td>
         <td>
-          <a href="#" ng-click="sortType = 'spentv'; sortReverse = !sortReverse">
+          <a href="#" ng-click="sortType = 'spent'; sortReverse = !sortReverse">
           SPENTv
-            <span ng-show="sortType == 'spentv' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'spentv' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'spent' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'spent' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
       </tr>
@@ -73,7 +76,7 @@
         <td><input type="text" ng-model="budget.budget"></td>
         <td><input type="text" ng-model="budget.cpc"></td>
         <td><input type="text" ng-model="budget.cpm"></td>
-        <td><input type="text" ng-model="budget.spentv"></td>
+        <td><input type="text" ng-model="budget.spent"></td>
       </tr>
     </tbody>
 
@@ -82,7 +85,7 @@
         <a ng-click="addBudget()" href="#">Add a Budget</a>
     </p>
     <p class="text-center text-muted">
-        <a href="#" target="_blank">Update Campaign Budgets Object</a>
+        <a ng-click="updateObject()" href="#">Update Campaign Budgets Object on Server</a>
     </p>
 
 

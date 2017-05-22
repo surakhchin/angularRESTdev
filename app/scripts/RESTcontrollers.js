@@ -8,13 +8,13 @@ angular.module('budgetsApp')
         }])
 
 
-        .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
+        .controller('MenuController', ['$scope', 'budgetFactory', function($scope, budgetFactory) {
             
 
 
                         $scope.showMenu = false;
             $scope.message = "Loading ... Attempting REST Call";
-                        menuFactory.getDishes().query(
+                        budgetFactory.getDishes().query(
                 function(response) {
                     $scope.dishes = response;
                     $scope.showMenu = true;
@@ -29,13 +29,13 @@ angular.module('budgetsApp')
 
 
 
-        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
+        .controller('DishDetailController', ['$scope', '$stateParams', 'budgetFactory', function($scope, $stateParams, budgetFactory) {
 
-            var dish= menuFactory.getDishes(parseInt($stateParams.id,10));
+            var dish= budgetFactory.getDishes(parseInt($stateParams.id,10));
 
             $scope.showDish = false;
             $scope.message="Loading ... Attempting REST GET Call to retrieve Dish Detail Data";
-            $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)})
+            $scope.dish = budgetFactory.getDishes().get({id:parseInt($stateParams.id,10)})
             .$promise.then(
                             function(response){
                                 $scope.dish = response;
@@ -50,7 +50,7 @@ angular.module('budgetsApp')
             
         }])
 
-        .controller('DishCommentController', ['$scope', 'menuFactory', function($scope,menuFactory) {
+        .controller('DishCommentController', ['$scope', 'budgetFactory', function($scope,budgetFactory) {
             
             $scope.mycomment = {rating:5, comment:"", author:"", date:""};
             
@@ -60,19 +60,19 @@ angular.module('budgetsApp')
                                 $scope.dish.comments.push($scope.mycomment);
 
                                 //REST .UPDATE
-                menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
+                budgetFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
                                 $scope.commentForm.$setPristine();
                                 $scope.mycomment = {rating:5, comment:"", author:"", date:""};
             }
         }])
 
         // implement the IndexController and About Controller here
-        .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
+        .controller('IndexController', ['$scope', 'budgetFactory', 'corporateFactory', function($scope, budgetFactory, corporateFactory) {
 
            $scope.leader = corporateFactory.getLeader(0);
 
             $scope.promotion = {};
-            menuFactory.getPromotion(0)
+            budgetFactory.getPromotion(0)
                         .then(
                             function(response){
                                 $scope.promotion = response.data;
@@ -81,7 +81,7 @@ angular.module('budgetsApp')
                         );
                         $scope.showDish = false;
                         $scope.message="Loading ... Attempting REST Call GET to pull home page content";
-                        $scope.dish = menuFactory.getDishes().get({id:3})
+                        $scope.dish = budgetFactory.getDishes().get({id:3})
                         .$promise.then(
                             function(response){
                                 $scope.dish = response;
