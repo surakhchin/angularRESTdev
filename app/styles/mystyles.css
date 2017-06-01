@@ -1,3 +1,7 @@
+td select {width: 30%; float: right}
+
+#cpm input {width: 65%}
+
 td input {
   width: 85%;
 }

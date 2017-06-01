@@ -46,16 +46,16 @@
             <span ng-show="sortType == 'budget' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
-        <td>
-          <a href="#" ng-click="sortType = 'cpc'; sortReverse = !sortReverse">
-          CPC
-            <span ng-show="sortType == 'cpc' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'cpc' && sortReverse" class="fa fa-caret-up"></span>
-          </a>
-        </td>
+        <!--<td>-->
+          <!--<a href="#" ng-click="sortType = 'cpc'; sortReverse = !sortReverse">-->
+          <!--CPC-->
+            <!--<span ng-show="sortType == 'cpc' && !sortReverse" class="fa fa-caret-down"></span>-->
+            <!--<span ng-show="sortType == 'cpc' && sortReverse" class="fa fa-caret-up"></span>-->
+          <!--</a>-->
+        <!--</td>-->
         <td>
           <a style="padding-right:45px" href="#" ng-click="sortType = 'cpm'; sortReverse = !sortReverse">
-          CPM
+          Primary Metric
             <span ng-show="sortType == 'cpm' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'cpm' && sortReverse" class="fa fa-caret-up"></span>
           </a>
@@ -69,28 +69,28 @@
         </td>
       </tr>
     </thead>
-
     <tbody>
       <tr ng-repeat="budget in budgets | orderBy:sortType:sortReverse | filter:searchBudgets">
-        <td><input type="text" ng-model="budget.id"><a><span ng-click="deleteBudget(budget);" style="padding-left: 5%" class="fa fa-times"></span></a></td>
-        <td><input type="text" ng-model="budget.budget"></td>
-        <td><input type="text" ng-model="budget.cpc"></td>
-        <td><input type="text" ng-model="budget.cpm"></td>
-        <td><input type="text" ng-model="budget.spent"></td>
+        <td><input type="number" ng-model="budget.id"><a ng-click="deleteBudget(budget);" class="btn btn-danger"><span style="float: right" class="fa fa-times"></span></a></td>
+        <td><input type="number" ng-model="budget.budget"></td>
+        <!--<td><input type="number" ng-model="budget.cpc"></td>-->
+        <td id="cpm"><input type="number" ng-model="budget.cpm">
+            <select ng-model="selectedMetric" ng-options="x for x in metrics" ></select></td>
+        <td><input type="number" ng-model="budget.spent"></td>
+        <td><a class="btn btn-primary" href="#" ng-click="submitBudget(budget)">Update</a></td>
       </tr>
     </tbody>
 
   </table>
     <p class="text-center text-muted">
-        <a ng-click="addBudget()" href="#">Add a Budget</a>
+        <a class="btn btn-success" ng-click="addBudget()" href="#">Add a Budget</a>
     </p>
     <p class="text-center text-muted">
-        <a ng-click="updateObject()" href="#">Update Campaign Budgets Object on Server</a>
+        <a class="btn btn-default" ng-click="updateObject()" href="#">Update Campaign Budgets Object on Server</a>
     </p>
 
-
-
-</div>
         </div>
+
     </div>
+
 </div>

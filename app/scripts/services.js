@@ -11,7 +11,7 @@ angular.module('budgetsApp')
                 // };
 
                 this.getBudgets = function () {
-                    return $resource(baseURL+"budgets",null,  {'update':{method:'POST' }});
+                    return $resource(baseURL+"budgets/:id",null,  {'update':{method:'PUT'}});
                 };
 
 
